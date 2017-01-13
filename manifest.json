@@ -9,14 +9,7 @@
     "default_icon": "logo.png",
     "default_popup": "popup.html",
     "default_title": "hocus"
-  },  
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["jquery.js", "jquery.modal.min.js", "content.js"],
-      "css": ["content.css"]
-    }
-  ],
+  },
   "permissions":  [
     "contextMenus",
     "tabs",
@@ -30,7 +23,7 @@
       "128": "logo.png"
     },  
   "externally_connectable": {    
-    "matches": ["*://*.hocus.io/*", "http://localhost/"]
+    "matches": ["http://localhost/"]
   },
   "manifest_version": 2
 }
