@@ -4,8 +4,24 @@ function log(data) {
   }, "json");    
 }
 
+log({
+  time: Date.now(),
+  event: "extension_loaded"
+});
+
+chrome.tabs.onCreated.addListener(function(tab){
+    var data = {
+      time: Date.now(),
+      windowId: tab.windowId,
+      tabId: tab.id,
+      parentTab: (tab.openerTabId || -1),
+      url: tab.url,
+      event: 'created'
+    }
+    log(data);
+});
+
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
-  console.log(changeInfo.status + " " + tabId)
   if (changeInfo.status == 'loading') {
     var entry = {
       time: Date.now(),
@@ -31,4 +47,15 @@ chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
 
 chrome.windows.onCreated.addListener(function (window) {
   console.log(window);
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  var entry = {
+      time: Date.now(),
+      windowId: sender.tab.windowId,
+      tabId: sender.tab.id,      
+      url: sender.tab.url,
+      event: 'scrolled'
+    }
+    log(entry);  
 });
