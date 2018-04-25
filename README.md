@@ -1,4 +1,4 @@
-# TAB Smart
+# Zendo
 
 A smarter way to organize your tabs. First step is log your behaviour. This extension allows that.
 
